@@ -28,8 +28,7 @@ const App2 = () => {
     setTodos(
       todos.map((todo) => {
         if (todo.id === id) {
-          todo.complete = !todo.complete;
-          return todo;
+          return { ...todo, complete: !todo.complete };
         }
         return todo;
       })

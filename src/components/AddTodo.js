@@ -3,12 +3,14 @@ import React, { useState } from "react";
 const AddTodo = (props) => {
   const [newTodoItem, setNewTodoItem] = useState("");
 
+  const { onSubmit } = props;
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!newTodoItem) {
       return;
     }
-    props.onSubmit(newTodoItem);
+    onSubmit(newTodoItem);
     setNewTodoItem("");
   };
 
