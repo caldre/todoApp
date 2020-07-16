@@ -16,16 +16,21 @@ const Todo = (props) => {
     }
   }, [todoDetails.complete]);
 
+  const handleTogglingClick = () => {
+    toggleCompleteStatus(todoDetails.id);
+  };
+
+  const handleRemoveClick = () => {
+    removeTodo(todoDetails.id);
+  };
+
   return (
     <div className="wrapper" style={{ backgroundColor: color }}>
       <h3>{todoDetails.name}</h3>
-      <button
-        className="btn"
-        onClick={() => toggleCompleteStatus(todoDetails.id)}
-      >
+      <button className="btn" onClick={handleTogglingClick}>
         {text}
       </button>
-      <button className="btn" onClick={() => removeTodo(todoDetails.id)}>
+      <button className="btn" onClick={handleRemoveClick}>
         Remove from list
       </button>
     </div>
