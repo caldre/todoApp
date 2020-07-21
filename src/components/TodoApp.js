@@ -61,7 +61,7 @@ const TodoApp = () => {
   return (
     <div className={`container ${setTheme()}`}>
         <div className="app-container">
-      <button className="theme-btn" onClick={handleDarkModeClick} >Dark Mode </button>
+      <button className={`fas fa-lightbulb fa-2x btn theme-btn-${setTheme()}`} onClick={handleDarkModeClick} ></button>
       <AddTodo onSubmit={addTodo}/>
       {renderedTodos}
       </div>

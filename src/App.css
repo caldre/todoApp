@@ -25,16 +25,15 @@ body {
 .container.light-mode {
   transition: 0.15s;
   color: var(--txt-color);
-  background-color: var(--bg-color);
   background-image: linear-gradient(-90deg, rgb(255, 255, 255), rgb(162, 192, 255));
-  
+  overflow: auto;
 }
 
 .container.dark-mode {
   transition: 0.15s;
   color: var(--dark-text-color);
-  background-color: var(--dark-bg-color);
   background-image: linear-gradient(-90deg, rgb(12, 12, 19), rgb(8, 16, 34));
+  overflow: auto;
 }
 
 .app-container {
@@ -43,9 +42,30 @@ body {
   
 }
 
-.theme-btn {
+.theme-btn-light-mode {
   position: absolute;
-  left: 0;
+  top: 3vh;
+  left: 3vh;
+
+  transition: 0.2s;
+
+  border: none; 
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(255, 255, 255, 0);
+}
+
+.theme-btn-dark-mode {
+  position: absolute;
+  top: 3vh;
+  left: 3vh;
+
+  transition: 0.2s;
+
+  border: none; 
+  cursor: pointer;
+  color: rgb(241, 255, 113);
+  background-color: rgba(255, 255, 255, 0);
 }
 
 .input-wrapper {
@@ -56,6 +76,7 @@ body {
 
 #input {
   flex-grow: 4;
+  padding: 1vh;
   
 }
 
@@ -107,7 +128,6 @@ background-color: rgb(49, 47, 102);
 .todo-text {
   flex-grow: 4;
   text-align: center;
-  line-height: 7vh;
 }
 
 .btn {
@@ -125,7 +145,7 @@ background-color: rgb(49, 47, 102);
   margin: 0 2vh;
 }
 
-.btn:focus {
+.theme-btn, .btn:focus {
   outline: 0;
 }
 
@@ -142,4 +162,23 @@ display: flex;
   justify-content: center;
   align-items: center;
   color: red;
+}
+
+.fa-plus-circle {
+  -webkit-text-stroke-width: 1px;
+   -webkit-text-stroke-color: black;
+}
+
+.fa-check-circle {
+  -webkit-text-stroke-width: 1px;
+   -webkit-text-stroke-color: rgba(0, 0, 0, 0.5);
+}
+
+.fa-window-close {
+  -webkit-text-stroke-width: 1px;
+   -webkit-text-stroke-color: rgb(0, 0, 0);
+}
+
+.fa-lightbulb-o {
+
 }
