@@ -1,20 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, {useState} from "react";
 
 const Todo = (props) => {
-  const [color, setColor] = useState("");
-  const [text, setText] = useState("");
+  const [hovered, setHovered] = useState(false);
 
-  const { todoDetails, toggleCompleteStatus, removeTodo } = props;
+  const { todoDetails, toggleCompleteStatus, removeTodo, darkMode } = props;
 
-  useEffect(() => {
-    if (todoDetails.complete === true) {
-      setColor("lightgreen");
-      setText("Complete");
-    } else {
-      setColor("pink");
-      setText("Incomplete");
-    }
-  }, [todoDetails.complete]);
+const renderCompleteIcon = () => {
+  if (todoDetails.complete){
+  return  <i id="check" className={`fas fa-check-circle fa-2x`}/>
+}
+  else return <i id="check"/>
+}
+
+const setComplete = () => {
+  if(todoDetails.complete) {
+    return "completed"
+  } else return "incomplete"
+}
 
   const handleTogglingClick = () => {
     toggleCompleteStatus(todoDetails.id);
@@ -24,15 +26,22 @@ const Todo = (props) => {
     removeTodo(todoDetails.id);
   };
 
+  const setTheme = () => {
+    if (darkMode) {
+      return "dark-mode"
+    } else return "light-mode"
+  }
+
   return (
-    <div className="wrapper" style={{ backgroundColor: color }}>
-      <h3>{todoDetails.name}</h3>
-      <button className="btn" onClick={handleTogglingClick}>
-        {text}
-      </button>
-      <button className="btn" onClick={handleRemoveClick}>
-        Remove from list
-      </button>
+    <div    className={`todos-wrapper ${setTheme()}`}
+            onMouseOver={() => setHovered(true)}
+            onMouseLeave={() => setHovered(false)}>
+              {renderCompleteIcon()}
+      <div  className={`todo-text ${setComplete()}`}
+            onClick={handleTogglingClick}  >{todoDetails.name}</div>
+      
+      {hovered ? <i id="delete-btn" className={`fas fa-window-close fa-2x`} onClick={handleRemoveClick}></i> : <i id="delete-btn"/>}
+      
     </div>
   );
 };

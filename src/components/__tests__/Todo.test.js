@@ -1,12 +1,11 @@
 import React from "react";
 import Todo from "../Todo";
 import renderer from "react-test-renderer";
-import { v4 as uuid } from "uuid";
 
+
+// Mock data for testing
 const props = { id: 43124321, name: "Go to the supermarket", complete: false };
-
 const removeTodo = () => {};
-
 const toggleCompleteStatus = () => {};
 
 test("Todo component renders", () => {

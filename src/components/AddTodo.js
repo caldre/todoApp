@@ -16,18 +16,19 @@ const AddTodo = (props) => {
 
   return (
     <form
-      className="wrapper"
-      style={{ gridTemplateColumns: "7fr 2fr" }}
+      className="input-wrapper"
       onSubmit={(e) => handleSubmit(e)}
     >
       <input
         placeholder="Add new todo"
+        id="input"
         value={newTodoItem}
         onChange={(e) => setNewTodoItem(e.target.value)}
         autoFocus
       />
-      <button className="btn btn-success" type="submit" value="Submit">
-        Submit
+      <button className="btn" type="submit" value="Submit">
+      <i id="add-btn" className="fa fa-plus-circle fa-3x" />
+        
       </button>
     </form>
   );
