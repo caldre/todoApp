@@ -37,8 +37,8 @@ const setComplete = () => {
             onMouseOver={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}>
               {renderCompleteIcon()}
-      <div  className={`todo-text ${setComplete()}`}
-            onClick={handleTogglingClick}  >{todoDetails.name}</div>
+      <p  className={`todo-text ${setComplete()}`}
+            onClick={handleTogglingClick}  >{todoDetails.name}</p>
       
       {hovered ? <i id="delete-btn" className={`fas fa-window-close fa-2x`} onClick={handleRemoveClick}></i> : <i id="delete-btn"/>}
       

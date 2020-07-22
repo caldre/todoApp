@@ -39,3 +39,9 @@ test("Check that component renders with correct default props", () => {
   expect(testInstance.findByType(Todo).props.todoDetails.complete).toBe(false);
   // expect(testInstance.findByProps({className: "sub"}).children).toEqual(['Sub']);
 });
+
+test("Check that clicking events fire only once", () => {
+
+
+  
+})

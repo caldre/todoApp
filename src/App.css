@@ -1,122 +1,102 @@
 * {
-margin: 0;
-padding: 0;
+margin: 0px;
+padding: 0vh;
+border: 0px solid black;
 
 user-select: none;
 }
 
 :root {
-  --txt-color: black;
+  --light-txt-color: black;
   --dark-text-color: white;
 
-  --bg-color: #fff;
-  --dark-bg-color: rgb(26, 25, 61);
-}
-
-body {
-  
+  --light-bg-color: #fff;
+  --dark-bg-color: rgb(30, 30, 60);
 }
 
 .container {
   height: 100vh;
-
+  overflow: auto;
 }
 
 .container.light-mode {
-  transition: 0.15s;
-  color: var(--txt-color);
-  background-image: linear-gradient(-90deg, rgb(255, 255, 255), rgb(162, 192, 255));
-  overflow: auto;
+  color: var(--light-txt-color);
+  background-image: linear-gradient(90deg, rgb(160, 190, 200), rgb(255, 255, 255));
 }
 
 .container.dark-mode {
-  transition: 0.15s;
   color: var(--dark-text-color);
   background-image: linear-gradient(-90deg, rgb(12, 12, 19), rgb(8, 16, 34));
-  overflow: auto;
 }
 
 .app-container {
   margin: 0px auto;
   max-width: 480px;
-  
 }
 
-.theme-btn-light-mode {
-  position: absolute;
-  top: 3vh;
-  left: 3vh;
-
-  transition: 0.2s;
-
+.btn {
   border: none; 
   cursor: pointer;
+  background-color: transparent;
+  outline: 0;
+}
+
+.theme-btn {
+  position: absolute;
+  top: 3vh;
+  left: 3vh;  
+}
+
+.theme-btn.light-mode {
+  transition: 0.5s;
   color: rgba(0, 0, 0, 0.8);
-  background-color: rgba(255, 255, 255, 0);
 }
 
-.theme-btn-dark-mode {
-  position: absolute;
-  top: 3vh;
-  left: 3vh;
-
-  transition: 0.2s;
-
-  border: none; 
-  cursor: pointer;
+.theme-btn.dark-mode {
+  transition: 0.5s;
   color: rgb(241, 255, 113);
-  background-color: rgba(255, 255, 255, 0);
 }
 
 .input-wrapper {
   display: flex;
-  
   padding: 10vh 0;
 }
 
 #input {
   flex-grow: 4;
   padding: 1vh;
-  
+  box-shadow: rgba(0, 0, 0, 0.2) 2px 2px 10px;
+}
+
+.todos-wrapper {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  margin-top: 2vh;
+  padding: 1vh;
+
+  cursor: pointer;
+
+  box-shadow: rgba(0, 0, 0, 0.2) 2px 2px 10px;
 }
 
 .todos-wrapper.light-mode {
-  min-height: 7vh;
-  margin-bottom: 3vh;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  
-  background-color: rgba(255, 255, 255, 0.5);
-  box-shadow: rgba(0, 0, 0, 0.2) 2px 2px 10px;
-
-  cursor: pointer;
-  transition: 0.1s;
+  background-color: rgba(255, 255, 255, 0.3);
+  transition: 1s;
 }
 
-.todos-wrapper, .light-mode:hover { 
-  background-color: var(--bg-color);
+.todos-wrapper.light-mode:hover { 
+  background-color: var(--light-bg-color);
   transition: 0.1s;
 } 
 
-.todos-wrapper.dark-mode {
-  min-height: 7vh;
-  margin-bottom: 3vh;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  
+.todos-wrapper.dark-mode {  
   background-color: var(--dark-bg-color);
-  box-shadow: rgba(0, 0, 0, 0.2) 2px 2px 10px;
-
-  cursor: pointer;
-  transition: 0.1s;
+  transition: 1s;
 }
 
-.todos-wrapper, .dark-mode:hover { 
-background-color: rgb(49, 47, 102);
+.todos-wrapper.dark-mode:hover { 
+  background-color: rgb(50, 50, 100);
   transition: 0.1s;
 } 
 
@@ -126,41 +106,40 @@ background-color: rgb(49, 47, 102);
 }
 
 .todo-text {
+  padding: 1vh;
   flex-grow: 4;
   text-align: center;
 }
 
-.btn {
-  border: none; 
-  cursor: pointer;
-  
-  background-color: rgba(255, 255, 255, 0);
+.todo-text:hover {
+  text-decoration: line-through;
 }
 
 #check, #add-btn {
-  color:rgb(60, 255, 60);
+  color:rgba(50, 255, 50, 0.678);
 }
 
 #add-btn {
   margin: 0 2vh;
 }
 
-.theme-btn, .btn:focus {
-  outline: 0;
-}
-
 #check {
-min-width: 10vh;
-display: flex;
-  justify-content: center;
+  display: flex;
   align-items: center;
+
+  min-width: 6vh;
+
+  transition: 0.1s;
 }
 
 #delete-btn {
-  min-width: 10vh;
   display: flex;
-  justify-content: center;
   align-items: center;
+
+  min-width: 6vh;
+
+  transition: 0.1s;
+  
   color: red;
 }
 
@@ -176,9 +155,5 @@ display: flex;
 
 .fa-window-close {
   -webkit-text-stroke-width: 1px;
-   -webkit-text-stroke-color: rgb(0, 0, 0);
-}
-
-.fa-lightbulb-o {
-
+   -webkit-text-stroke-color: rgba(0, 0, 0, 0.5);
 }

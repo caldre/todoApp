@@ -6,8 +6,8 @@ import { v4 as uuid } from "uuid";
 const TodoApp = () => {
   const [todos, setTodos] = useState([
     { id: uuid(), name: "Go to the supermarket", complete: false },
-    { id: uuid(), name: "Call Alice", complete: false },
-    { id: uuid(), name: "Ask Alice to call Bob", complete: false },
+    { id: uuid(), name: "Call Alice", complete: true },
+    { id: uuid(), name: "Ask Alice to call Bob", complete: true },
     { id: uuid(), name: "Do the dishes", complete: false },
     { id: uuid(), name: "Change car tyres", complete: false },
   ]);
@@ -61,7 +61,7 @@ const TodoApp = () => {
   return (
     <div className={`container ${setTheme()}`}>
         <div className="app-container">
-      <button className={`fas fa-lightbulb fa-2x btn theme-btn-${setTheme()}`} onClick={handleDarkModeClick} ></button>
+      <button className={`btn theme-btn ${setTheme()} fas fa-lightbulb fa-2x`} onClick={handleDarkModeClick}></button>
       <AddTodo onSubmit={addTodo}/>
       {renderedTodos}
       </div>
