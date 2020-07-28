@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import AddTodo from "./AddTodo";
-import Todo from "./Todo";
+import AddTodo from "./AddTodo/AddTodo";
+import Todo from "./Todo/Todo";
 import { v4 as uuid } from "uuid";
 
 const TodoApp = () => {
@@ -11,17 +11,17 @@ const TodoApp = () => {
     { id: uuid(), name: "Do the dishes", complete: false },
     { id: uuid(), name: "Change car tyres", complete: false },
   ]);
-  const [darkMode, setDarkMode] = useState(false)
+  const [darkMode, setDarkMode] = useState(false);
 
   const handleDarkModeClick = () => {
-    setDarkMode(!darkMode)
-  }
+    setDarkMode(!darkMode);
+  };
 
   const setTheme = () => {
     if (darkMode) {
-      return "dark-mode"
-    } else return "light-mode"
-  }
+      return "dark-mode";
+    } else return "light-mode";
+  };
 
   const addTodo = (todo) => {
     setTodos([...todos, { id: uuid(), name: todo, complete: false }]);
@@ -53,17 +53,20 @@ const TodoApp = () => {
         todoDetails={todo}
         toggleCompleteStatus={toggleCompleteStatus}
         removeTodo={removeTodo}
-        darkMode={darkMode}
+        setTheme={setTheme}
       />
     );
   });
 
   return (
     <div className={`container ${setTheme()}`}>
-        <div className="app-container">
-      <button className={`btn theme-btn ${setTheme()} fas fa-lightbulb fa-2x`} onClick={handleDarkModeClick}></button>
-      <AddTodo onSubmit={addTodo}/>
-      {renderedTodos}
+      <div className="app-container">
+        <button
+          className={`btn theme-btn ${setTheme()} fas fa-lightbulb fa-2x`}
+          onClick={handleDarkModeClick}
+        ></button>
+        <AddTodo onSubmit={addTodo} />
+        {renderedTodos}
       </div>
     </div>
   );

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./AddTodo.css";
 
 const AddTodo = (props) => {
   const [newTodoItem, setNewTodoItem] = useState("");
@@ -15,20 +16,16 @@ const AddTodo = (props) => {
   };
 
   return (
-    <form
-      className="input-wrapper"
-      onSubmit={(e) => handleSubmit(e)}
-    >
+    <form className="input-wrapper" onSubmit={(e) => handleSubmit(e)}>
       <input
         placeholder="Add new todo"
-        id="input"
+        className="input-field"
         value={newTodoItem}
         onChange={(e) => setNewTodoItem(e.target.value)}
         autoFocus
       />
-      <button className="btn" type="submit" value="Submit">
-      <i id="add-btn" className="fa fa-plus-circle fa-3x" />
-        
+      <button className="btn add-btn" type="submit" value="Submit">
+        <i className="add-icon fas fa-plus-circle fa-3x" />
       </button>
     </form>
   );

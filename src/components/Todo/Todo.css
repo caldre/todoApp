@@ -1,0 +1,73 @@
+.todos-wrapper {
+  display: flex;
+  justify-content: space-between;
+  min-height: 3rem;
+  margin-top: 1rem;
+  cursor: pointer;
+  box-shadow: var(--box-shadow) 2px 2px 10px;
+}
+
+.todos-wrapper.light-mode {
+  background-color: var(--light-bg-color);
+  transition: var(--fade-time);
+}
+
+.todos-wrapper.light-mode:hover {
+  background-color: var(--light-hovered);
+  transition: var(--hover-time);
+}
+
+.todos-wrapper.dark-mode {
+  background-color: var(--dark-bg-color);
+  transition: var(--fade-time);
+}
+
+.todos-wrapper.dark-mode:hover {
+  background-color: var(--dark-hovered);
+  transition: var(--hover-time);
+}
+
+.btn.complete-btn {
+  padding: 0rem 0.5rem;
+  width: 100%;
+  align-self: stretch;
+}
+
+.todo-text-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.todo-text {
+  flex-grow: 4;
+  text-align: center;
+  padding: 1rem 0rem;
+}
+
+.todo-text.completed {
+  transition: var(--fade-time);
+  text-decoration: line-through;
+  opacity: 0.3;
+}
+
+.btn.delete-btn {
+  align-self: center;
+  margin: 0rem 0.5rem;
+  flex-grow: 1;
+  min-width: 2rem;
+}
+
+.check-icon {
+  transition: var(--icon-transition);
+  padding: 0rem 0.5rem;
+  min-width: 2rem;
+  color: var(--success);
+  -webkit-text-stroke-width: 0.5px;
+  -webkit-text-stroke-color: rgba(0, 0, 0, 1);
+}
+
+.delete-icon {
+  transition: var(--icon-transition);
+  color: var(--danger);
+  -webkit-text-stroke-color: rgba(0, 0, 0, 1);
+}
