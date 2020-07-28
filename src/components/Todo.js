@@ -7,9 +7,9 @@ const Todo = (props) => {
 
 const renderCompleteIcon = () => {
   if (todoDetails.complete){
-  return  <i id="check" className={`fas fa-check-circle fa-2x`}/>
+  return "fas fa-check-circle fa-2x"
 }
-  else return <i id="check"/>
+  else return null
 }
 
 const setComplete = () => {
@@ -36,12 +36,12 @@ const setComplete = () => {
     <div    className={`todos-wrapper ${setTheme()}`}
             onMouseOver={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}>
-              {renderCompleteIcon()}
+      <i id="check" className={renderCompleteIcon()} />
       <p  className={`todo-text ${setComplete()}`}
             onClick={handleTogglingClick}  >{todoDetails.name}</p>
-      
-      {hovered ? <i id="delete-btn" className={`fas fa-window-close fa-2x`} onClick={handleRemoveClick}></i> : <i id="delete-btn"/>}
-      
+      <button className="btn" onClick={handleRemoveClick}>
+          {hovered ? <i id="delete-btn" className={`fas fa-window-close fa-2x`} ></i> : <i id="delete-btn"/>}
+      </button>
     </div>
   );
 };

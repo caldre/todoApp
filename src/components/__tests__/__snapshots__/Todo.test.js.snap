@@ -1,28 +1,110 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Changes state with mouse events 1`] = `
+<div
+  className="todos-wrapper light-mode"
+  onMouseLeave={[Function]}
+  onMouseOver={[Function]}
+>
+  <i
+    className={null}
+    id="check"
+  />
+  <p
+    className="todo-text incomplete"
+    onClick={[Function]}
+  >
+    Go to the supermarket
+  </p>
+  <button
+    className="btn"
+    onClick={[Function]}
+  >
+    <i
+      id="delete-btn"
+    />
+  </button>
+</div>
+`;
+
+exports[`Changes state with mouse events 2`] = `
+<div
+  className="todos-wrapper light-mode"
+  onMouseLeave={[Function]}
+  onMouseOver={[Function]}
+>
+  <i
+    className={null}
+    id="check"
+  />
+  <p
+    className="todo-text incomplete"
+    onClick={[Function]}
+  >
+    Go to the supermarket
+  </p>
+  <button
+    className="btn"
+    onClick={[Function]}
+  >
+    <i
+      id="delete-btn"
+    />
+  </button>
+</div>
+`;
+
+exports[`Changes state with mouse events 3`] = `
+<div
+  className="todos-wrapper light-mode"
+  onMouseLeave={[Function]}
+  onMouseOver={[Function]}
+>
+  <i
+    className={null}
+    id="check"
+  />
+  <p
+    className="todo-text incomplete"
+    onClick={[Function]}
+  >
+    Go to the supermarket
+  </p>
+  <button
+    className="btn"
+    onClick={[Function]}
+  >
+    <i
+      className="fas fa-window-close fa-2x"
+      id="delete-btn"
+    />
+  </button>
+</div>
+`;
+
 exports[`Todo component renders 1`] = `
 <div
-  className="wrapper"
-  style={
-    Object {
-      "backgroundColor": "",
-    }
-  }
+  className="todos-wrapper light-mode"
+  onMouseLeave={[Function]}
+  onMouseOver={[Function]}
 >
-  <h3>
+  <i
+    className={null}
+    id="check"
+  />
+  <p
+    className="todo-text incomplete"
+    onClick={[Function]}
+  >
     Go to the supermarket
-  </h3>
+  </p>
   <button
     className="btn"
     onClick={[Function]}
   >
-    
-  </button>
-  <button
-    className="btn"
-    onClick={[Function]}
-  >
-    Remove from list
+    <i
+      id="delete-btn"
+    />
   </button>
 </div>
 `;

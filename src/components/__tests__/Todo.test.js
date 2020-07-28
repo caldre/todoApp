@@ -1,6 +1,7 @@
 import React from "react";
 import Todo from "../Todo";
-import renderer from "react-test-renderer";
+import renderer, { act } from "react-test-renderer";
+import { shallow } from 'enzyme';
 
 
 // Mock data for testing
@@ -37,11 +38,44 @@ test("Check that component renders with correct default props", () => {
     "Go to the supermarket"
   );
   expect(testInstance.findByType(Todo).props.todoDetails.complete).toBe(false);
-  // expect(testInstance.findByProps({className: "sub"}).children).toEqual(['Sub']);
 });
 
-test("Check that clicking events fire only once", () => {
-
-
+test('Changes state with mouse events', () => {
   
+
+  const component = renderer.create(
+    <Todo
+      key={props.id}
+      todoDetails={props}
+      toggleCompleteStatus={toggleCompleteStatus}
+      removeTodo={removeTodo}
+    />,
+  );
+  let tree = component.toJSON();
+  expect(tree).toMatchSnapshot();
+
+  // manually trigger the event onMouseOver
+  act(() => {
+    tree.props.onMouseOver();
+    // re-rendering
+    tree = component.toJSON();
+    expect(tree).toMatchSnapshot();
+  })
+  
+  // manually trigger the event onMouseLeave
+  act(() => {
+    tree.props.onMouseLeave();
+    // re-rendering
+    tree = component.toJSON();
+    expect(tree).toMatchSnapshot();
+  })
+})
+
+test('renders two buttons', () => {
+  const wrapper = shallow(<Todo key={props.id}
+    todoDetails={props}
+    toggleCompleteStatus={toggleCompleteStatus}
+    removeTodo={removeTodo}
+  />)
+  expect(wrapper.find('button').length).toBe(2)
 })
