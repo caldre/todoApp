@@ -1,13 +1,16 @@
 import React from "react";
-import Todo from "../Todo";
+import Todo from "../Todo/Todo";
 import renderer, { act } from "react-test-renderer";
-import { shallow } from 'enzyme';
-
+import { shallow, configure } from "enzyme";
+import Adapter from "enzyme-adapter-react-16";
 
 // Mock data for testing
 const props = { id: 43124321, name: "Go to the supermarket", complete: false };
 const removeTodo = () => {};
 const toggleCompleteStatus = () => {};
+const setTheme = () => {};
+
+configure({ adapter: new Adapter() });
 
 test("Todo component renders", () => {
   const component = renderer.create(
@@ -16,6 +19,7 @@ test("Todo component renders", () => {
       todoDetails={props}
       toggleCompleteStatus={toggleCompleteStatus}
       removeTodo={removeTodo}
+      setTheme={setTheme}
     />
   );
   let tree = component.toJSON();
@@ -29,6 +33,7 @@ test("Check that component renders with correct default props", () => {
       todoDetails={props}
       toggleCompleteStatus={toggleCompleteStatus}
       removeTodo={removeTodo}
+      setTheme={setTheme}
     />
   );
   const testInstance = testRenderer.root;
@@ -40,16 +45,15 @@ test("Check that component renders with correct default props", () => {
   expect(testInstance.findByType(Todo).props.todoDetails.complete).toBe(false);
 });
 
-test('Changes state with mouse events', () => {
-  
-
+test("Changes state with mouse events", () => {
   const component = renderer.create(
     <Todo
       key={props.id}
       todoDetails={props}
       toggleCompleteStatus={toggleCompleteStatus}
       removeTodo={removeTodo}
-    />,
+      setTheme={setTheme}
+    />
   );
   let tree = component.toJSON();
   expect(tree).toMatchSnapshot();
@@ -60,22 +64,26 @@ test('Changes state with mouse events', () => {
     // re-rendering
     tree = component.toJSON();
     expect(tree).toMatchSnapshot();
-  })
-  
+  });
+
   // manually trigger the event onMouseLeave
   act(() => {
     tree.props.onMouseLeave();
     // re-rendering
     tree = component.toJSON();
     expect(tree).toMatchSnapshot();
-  })
-})
+  });
+});
 
-test('renders two buttons', () => {
-  const wrapper = shallow(<Todo key={props.id}
-    todoDetails={props}
-    toggleCompleteStatus={toggleCompleteStatus}
-    removeTodo={removeTodo}
-  />)
-  expect(wrapper.find('button').length).toBe(2)
-})
+test("renders two buttons", () => {
+  const wrapper = shallow(
+    <Todo
+      key={props.id}
+      todoDetails={props}
+      toggleCompleteStatus={toggleCompleteStatus}
+      removeTodo={removeTodo}
+      setTheme={setTheme}
+    />
+  );
+  expect(wrapper.find("button").length).toBe(2);
+});

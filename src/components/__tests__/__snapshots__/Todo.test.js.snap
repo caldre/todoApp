@@ -2,26 +2,33 @@
 
 exports[`Changes state with mouse events 1`] = `
 <div
-  className="todos-wrapper light-mode"
+  className="todos-wrapper undefined"
   onMouseLeave={[Function]}
   onMouseOver={[Function]}
 >
-  <i
-    className={null}
-    id="check"
-  />
-  <p
-    className="todo-text incomplete"
+  <button
+    className="btn complete-btn"
     onClick={[Function]}
   >
-    Go to the supermarket
-  </p>
+    <div
+      className="todo-text-wrapper"
+    >
+      <i
+        className="check-icon"
+      />
+      <p
+        className="todo-text incomplete"
+      >
+        Go to the supermarket
+      </p>
+    </div>
+  </button>
   <button
-    className="btn"
+    className="btn delete-btn"
     onClick={[Function]}
   >
     <i
-      id="delete-btn"
+      className="delete-icon"
     />
   </button>
 </div>
@@ -29,26 +36,33 @@ exports[`Changes state with mouse events 1`] = `
 
 exports[`Changes state with mouse events 2`] = `
 <div
-  className="todos-wrapper light-mode"
+  className="todos-wrapper undefined"
   onMouseLeave={[Function]}
   onMouseOver={[Function]}
 >
-  <i
-    className={null}
-    id="check"
-  />
-  <p
-    className="todo-text incomplete"
+  <button
+    className="btn complete-btn"
     onClick={[Function]}
   >
-    Go to the supermarket
-  </p>
+    <div
+      className="todo-text-wrapper"
+    >
+      <i
+        className="check-icon"
+      />
+      <p
+        className="todo-text incomplete"
+      >
+        Go to the supermarket
+      </p>
+    </div>
+  </button>
   <button
-    className="btn"
+    className="btn delete-btn"
     onClick={[Function]}
   >
     <i
-      id="delete-btn"
+      className="delete-icon"
     />
   </button>
 </div>
@@ -56,27 +70,33 @@ exports[`Changes state with mouse events 2`] = `
 
 exports[`Changes state with mouse events 3`] = `
 <div
-  className="todos-wrapper light-mode"
+  className="todos-wrapper undefined"
   onMouseLeave={[Function]}
   onMouseOver={[Function]}
 >
-  <i
-    className={null}
-    id="check"
-  />
-  <p
-    className="todo-text incomplete"
+  <button
+    className="btn complete-btn"
     onClick={[Function]}
   >
-    Go to the supermarket
-  </p>
+    <div
+      className="todo-text-wrapper"
+    >
+      <i
+        className="check-icon"
+      />
+      <p
+        className="todo-text incomplete"
+      >
+        Go to the supermarket
+      </p>
+    </div>
+  </button>
   <button
-    className="btn"
+    className="btn delete-btn"
     onClick={[Function]}
   >
     <i
-      className="fas fa-window-close fa-2x"
-      id="delete-btn"
+      className="delete-icon fas fa-window-close fa-2x"
     />
   </button>
 </div>
@@ -84,26 +104,33 @@ exports[`Changes state with mouse events 3`] = `
 
 exports[`Todo component renders 1`] = `
 <div
-  className="todos-wrapper light-mode"
+  className="todos-wrapper undefined"
   onMouseLeave={[Function]}
   onMouseOver={[Function]}
 >
-  <i
-    className={null}
-    id="check"
-  />
-  <p
-    className="todo-text incomplete"
+  <button
+    className="btn complete-btn"
     onClick={[Function]}
   >
-    Go to the supermarket
-  </p>
+    <div
+      className="todo-text-wrapper"
+    >
+      <i
+        className="check-icon"
+      />
+      <p
+        className="todo-text incomplete"
+      >
+        Go to the supermarket
+      </p>
+    </div>
+  </button>
   <button
-    className="btn"
+    className="btn delete-btn"
     onClick={[Function]}
   >
     <i
-      id="delete-btn"
+      className="delete-icon"
     />
   </button>
 </div>
