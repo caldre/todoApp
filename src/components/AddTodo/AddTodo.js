@@ -8,9 +8,6 @@ const AddTodo = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!newTodoItem) {
-      return;
-    }
     onSubmit(newTodoItem);
     setNewTodoItem("");
   };
@@ -23,8 +20,9 @@ const AddTodo = (props) => {
         value={newTodoItem}
         onChange={(e) => setNewTodoItem(e.target.value)}
         autoFocus
+        required
       />
-      <button className="btn add-btn" type="submit" value="Submit">
+      <button className="btn add-btn" type="submit" aria-label="Add a new task">
         <i className="add-icon fas fa-plus-circle fa-3x" />
       </button>
     </form>

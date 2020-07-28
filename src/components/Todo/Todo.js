@@ -4,7 +4,7 @@ import "./Todo.css";
 const Todo = (props) => {
   const [hovered, setHovered] = useState(false);
 
-  const { todoDetails, toggleCompleteStatus, removeTodo, setTheme } = props;
+  const { todoDetails, toggleCompleteStatus, removeTodo } = props;
 
   const setComplete = () => {
     if (todoDetails.complete) {
@@ -22,11 +22,15 @@ const Todo = (props) => {
 
   return (
     <div
-      className={`todos-wrapper ${setTheme()}`}
+      className={`todos-wrapper`}
       onMouseOver={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      <button className="btn complete-btn" onClick={handleTogglingClick}>
+      <button
+        className="btn complete-btn"
+        onClick={handleTogglingClick}
+        aria-label="Toggle tasks complete status"
+      >
         <div className="todo-text-wrapper">
           {todoDetails.complete ? (
             <i className="check-icon fas fa-check-circle fa-2x" />
@@ -37,7 +41,11 @@ const Todo = (props) => {
         </div>
       </button>
 
-      <button className="btn delete-btn" onClick={handleRemoveClick}>
+      <button
+        className="btn delete-btn"
+        onClick={handleRemoveClick}
+        aria-label="Delete task"
+      >
         {hovered ? (
           <i className="delete-icon fas fa-window-close fa-2x"></i>
         ) : (

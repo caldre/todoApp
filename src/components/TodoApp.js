@@ -64,6 +64,7 @@ const TodoApp = () => {
         <button
           className={`btn theme-btn ${setTheme()} fas fa-lightbulb fa-2x`}
           onClick={handleDarkModeClick}
+          aria-label="Toggle dark theme"
         ></button>
         <AddTodo onSubmit={addTodo} />
         {renderedTodos}

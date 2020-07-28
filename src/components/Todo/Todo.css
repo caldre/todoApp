@@ -7,22 +7,22 @@
   box-shadow: var(--box-shadow) 2px 2px 10px;
 }
 
-.todos-wrapper.light-mode {
+.light-mode .todos-wrapper {
   background-color: var(--light-bg-color);
   transition: var(--fade-time);
 }
 
-.todos-wrapper.light-mode:hover {
+.light-mode .todos-wrapper:hover {
   background-color: var(--light-hovered);
   transition: var(--hover-time);
 }
 
-.todos-wrapper.dark-mode {
+.dark-mode .todos-wrapper {
   background-color: var(--dark-bg-color);
   transition: var(--fade-time);
 }
 
-.todos-wrapper.dark-mode:hover {
+.dark-mode .todos-wrapper:hover {
   background-color: var(--dark-hovered);
   transition: var(--hover-time);
 }
