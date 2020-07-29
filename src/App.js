@@ -1,147 +1,71 @@
-import React from 'react';
-import './App.css';
+import React, { useState } from "react";
+import AddTodo from "./components/AddTodo/AddTodo";
+import Todo from "./components/Todo/Todo";
+import { v4 as uuid } from "uuid";
+import "./App.css";
 
-const todos = [
-    {id: 1, name: 'Go to the supermarket', complete: false},
-    {id: 2, name: 'Call Alice', complete: false},
-    {id: 3, name: 'Ask Alice to call Bob', complete: false},
-    {id: 4, name: 'Do the dishes', complete: false},
-    {id: 5, name: 'Change car tyres', complete: false}
-];
+const App = () => {
+  const [todos, setTodos] = useState([
+    { id: uuid(), name: "Go to the supermarket", complete: false },
+    { id: uuid(), name: "Call Alice", complete: false },
+    { id: uuid(), name: "Ask Alice to call Bob", complete: false },
+    { id: uuid(), name: "Do the dishes", complete: false },
+    { id: uuid(), name: "Change car tyres", complete: false },
+  ]);
+  const [darkMode, setDarkMode] = useState(false);
 
-class App extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            newTodoName: '',
-            todos: todos
-        };
-    }
+  const handleDarkModeClick = () => {
+    setDarkMode(!darkMode);
+  };
 
-    generateNewId() {
-        return this.state.todos.length + 1;
-    }
+  const setTheme = () => {
+    return darkMode ? "dark-mode" : "light-mode";
+  };
 
-    onSubmit(event) {
-        event.preventDefault();
+  const addTodo = (todo) => {
+    setTodos([...todos, { id: uuid(), name: todo, complete: false }]);
+  };
 
-        var newTodos = this.state.todos.slice();
-        newTodos.push({
-            id: this.generateNewId(),
-            name: this.state.newTodoName,
-            complete: false
-        });
+  const removeTodo = (id) => {
+    setTodos(
+      todos.filter((todo) => {
+        return todo.id !== id;
+      })
+    );
+  };
 
-        this.setState({todos: newTodos, newTodoName: ''});
-    }
+  const toggleCompleteStatus = (id) => {
+    setTodos(
+      todos.map((todo) => {
+        return todo.id === id ? { ...todo, complete: !todo.complete } : todo;
+      })
+    );
+  };
 
-    onClick(id) {
-        var todoItems = this.state.todos.slice();
-        for (let i = 0; i < this.state.todos.length; i++) {
-            if (todoItems[i].id === id) {
-                var newComplete = !todoItems[i].complete;
-                todoItems[i].complete = newComplete;
-            }
-        }
+  const renderedTodos = todos.map((todo) => {
+    return (
+      <Todo
+        key={todo.id}
+        todoDetails={todo}
+        toggleCompleteStatus={toggleCompleteStatus}
+        removeTodo={removeTodo}
+      />
+    );
+  });
 
-        this.setState({
-            todos: todoItems
-        });
-    }
-
-    onChange(event) {
-        this.setState({newTodoName: event.target.value});
-    }
-    onRemoveClick(id) {
-        //implement this logic
-        console.log('Remove Item!');
-    }
-
-    render() {
-        return (
-            <div className="">
-                {this.todoItems()}
-                <Bar
-                    onSubmit={this.onSubmit.bind(this)}
-                    newTodoName={this.state.newTodoName}
-                    onInputChange={this.onChange.bind(this)}
-                />
-            </div>
-        );
-    }
-
-    todoItems = () => {
-        var retVal = [];
-
-        for (let i = 0; i < this.state.todos.length; i++) {
-            var todo = this.state.todos[i];
-            retVal.push(
-                <Hello
-                    key={todo.id}
-                    todo={todo}
-                    onClick={this.onClick.bind(this)}
-                    onRemoveClick={this.onRemoveClick.bind(this)}
-                />
-            );
-        }
-        return retVal;
-    };
-}
-
-class Hello extends React.Component {
-    render() {
-        var color;
-        var text;
-
-        if (this.props.todo.complete === true) {
-            color = 'lightgreen';
-            text = 'Complete';
-        } else {
-            color = 'pink';
-            text = 'Incomplete';
-        }
-
-        return (
-            <div className="wrapper" style={{backgroundColor: color}}>
-                <h3>{this.props.todo.name}</h3>
-                <button
-                    className="btn"
-                    onClick={() => this.props.onClick(this.props.todo.id)}>
-                    {text}
-                </button>
-                <button
-                    className="btn"
-                    onClick={() =>
-                        this.props.onRemoveClick(this.props.todo.id)
-                    }>
-                    Remove from list
-                </button>
-            </div>
-        );
-    }
-}
-
-class Bar extends React.Component {
-    render() {
-        return (
-            <form
-                className="wrapper"
-                style={{'grid-template-columns': '7fr 2fr'}}
-                onSubmit={this.props.onSubmit}>
-                <input
-                    placeholder="Add new todo"
-                    value={this.props.newTodoName}
-                    onChange={this.props.onInputChange}
-                />
-                <button
-                    className="btn btn-success"
-                    type="submit"
-                    value="Submit">
-                    Submit
-                </button>
-            </form>
-        );
-    }
-}
+  return (
+    <div className={`container ${setTheme()}`}>
+      <div className="app-container">
+        <button
+          className={`btn theme-btn ${setTheme()} fas fa-lightbulb fa-2x`}
+          onClick={handleDarkModeClick}
+          aria-label="Toggle dark theme"
+        ></button>
+        <AddTodo onSubmit={addTodo} />
+        {renderedTodos}
+      </div>
+    </div>
+  );
+};
 
 export default App;

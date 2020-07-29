@@ -1,4 +1,4 @@
-.todos-wrapper {
+.todo-wrapper {
   display: flex;
   justify-content: space-between;
   min-height: 3rem;
@@ -7,22 +7,22 @@
   box-shadow: var(--box-shadow) 2px 2px 10px;
 }
 
-.light-mode .todos-wrapper {
+.light-mode .todo-wrapper {
   background-color: var(--light-bg-color);
   transition: var(--fade-time);
 }
 
-.light-mode .todos-wrapper:hover {
+.light-mode .todo-wrapper:hover {
   background-color: var(--light-hovered);
   transition: var(--hover-time);
 }
 
-.dark-mode .todos-wrapper {
+.dark-mode .todo-wrapper {
   background-color: var(--dark-bg-color);
   transition: var(--fade-time);
 }
 
-.dark-mode .todos-wrapper:hover {
+.dark-mode .todo-wrapper:hover {
   background-color: var(--dark-hovered);
   transition: var(--hover-time);
 }

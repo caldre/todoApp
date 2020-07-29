@@ -6,12 +6,6 @@ const Todo = (props) => {
 
   const { todoDetails, toggleCompleteStatus, removeTodo } = props;
 
-  const setComplete = () => {
-    if (todoDetails.complete) {
-      return "completed";
-    } else return "incomplete";
-  };
-
   const handleTogglingClick = () => {
     toggleCompleteStatus(todoDetails.id);
   };
@@ -22,7 +16,7 @@ const Todo = (props) => {
 
   return (
     <div
-      className={`todos-wrapper`}
+      className={`todo-wrapper`}
       onMouseOver={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
@@ -32,12 +26,15 @@ const Todo = (props) => {
         aria-label="Toggle tasks complete status"
       >
         <div className="todo-text-wrapper">
-          {todoDetails.complete ? (
-            <i className="check-icon fas fa-check-circle fa-2x" />
-          ) : (
-            <i className="check-icon" />
-          )}
-          <p className={`todo-text ${setComplete()}`}>{todoDetails.name}</p>
+          <i
+            className={`check-icon ${
+              todoDetails.complete ? "fas fa-check-circle fa-2x" : ""
+            }`}
+          />
+
+          <p className={`todo-text ${todoDetails.complete ? "completed" : ""}`}>
+            {todoDetails.name}
+          </p>
         </div>
       </button>
 
@@ -46,11 +43,11 @@ const Todo = (props) => {
         onClick={handleRemoveClick}
         aria-label="Delete task"
       >
-        {hovered ? (
-          <i className="delete-icon fas fa-window-close fa-2x"></i>
-        ) : (
-          <i className="delete-icon" />
-        )}
+        <i
+          className={`delete-icon ${
+            hovered ? "fas fa-window-close fa-2x" : ""
+          }`}
+        ></i>
       </button>
     </div>
   );

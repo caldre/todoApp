@@ -4,7 +4,6 @@ import renderer, { act } from "react-test-renderer";
 import { shallow, configure } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 
-// Mock data for testing
 const props = { id: 43124321, name: "Go to the supermarket", complete: false };
 const removeTodo = () => {};
 const toggleCompleteStatus = () => {};

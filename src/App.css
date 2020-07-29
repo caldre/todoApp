@@ -23,7 +23,7 @@
   --danger: red;
 
   --hover-time: 0.1s;
-  --fade-time: 1s;
+  --fade-time: 0.5s;
   --icon-transition: 0.2s;
 }
 
@@ -41,17 +41,17 @@
   );
 }
 
+.container.dark-mode {
+  color: var(--dark-text-color);
+  background-image: linear-gradient(90deg, rgb(12, 12, 19), rgb(8, 16, 34));
+}
+
 .light-mode p {
   color: var(--light-txt-color);
 }
 
 .dark-mode p {
   color: var(--dark-text-color);
-}
-
-.container.dark-mode {
-  color: var(--dark-text-color);
-  background-image: linear-gradient(90deg, rgb(12, 12, 19), rgb(8, 16, 34));
 }
 
 .app-container {
