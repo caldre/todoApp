@@ -3,10 +3,11 @@ import { render, fireEvent } from "@testing-library/react";
 import Todo from "../Todo/Todo";
 import renderer from "react-test-renderer";
 
-let props = { id: 43124321, name: "Go to the supermarket", complete: false };
+const expectedId = 12341234;
+let props = { id: expectedId, name: "Go to the supermarket", complete: false };
 
 test("Todo component renders", () => {
-  const component = render(<Todo key={props.id} todoDetails={props} />);
+  const component = render(<Todo todoDetails={props} />);
 
   expect(component.container.firstChild).toMatchSnapshot();
 });
@@ -15,7 +16,7 @@ test("Check that component renders with correct default props", () => {
   const testRenderer = renderer.create(<Todo todoDetails={props} />);
   const testInstance = testRenderer.root;
 
-  expect(testInstance.findByType(Todo).props.todoDetails.id).toBe(43124321);
+  expect(testInstance.findByType(Todo).props.todoDetails.id).toBe(expectedId);
   expect(testInstance.findByType(Todo).props.todoDetails.name).toBe(
     "Go to the supermarket"
   );
@@ -44,7 +45,7 @@ test("Toggle button is called exactly once with a correct argument", () => {
   expect(mockToggle).toHaveBeenCalledTimes(0);
   fireEvent.click(toggleComplete);
   expect(mockToggle).toHaveBeenCalledTimes(1);
-  expect(mockToggle).toHaveBeenCalledWith(43124321);
+  expect(mockToggle).toHaveBeenCalledWith(expectedId);
 });
 
 test("Delete button is called exactly once with a correct argument", () => {
@@ -57,5 +58,5 @@ test("Delete button is called exactly once with a correct argument", () => {
   expect(mockDelete).toHaveBeenCalledTimes(0);
   fireEvent.click(deleteButton);
   expect(mockDelete).toHaveBeenCalledTimes(1);
-  expect(mockDelete).toHaveBeenCalledWith(43124321);
+  expect(mockDelete).toHaveBeenCalledWith(expectedId);
 });

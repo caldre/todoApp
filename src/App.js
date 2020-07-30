@@ -27,11 +27,7 @@ const App = () => {
   };
 
   const removeTodo = (id) => {
-    setTodos(
-      todos.filter((todo) => {
-        return todo.id !== id;
-      })
-    );
+    setTodos(todos.filter((todo) => todo.id !== id));
   };
 
   const toggleCompleteStatus = (id) => {
@@ -57,7 +53,7 @@ const App = () => {
     <div className={`container ${setTheme()}`}>
       <div className="app-container">
         <button
-          className={`btn theme-btn ${setTheme()} fas fa-lightbulb fa-2x`}
+          className={`btn theme-btn fas fa-lightbulb fa-2x ${setTheme()}`}
           onClick={handleDarkModeClick}
           aria-label="Toggle dark theme"
         ></button>
