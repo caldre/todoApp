@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Todo component renders 1`] = `
+<div
+  class="todo-wrapper"
+  data-testid="todo-wrapper"
+>
+  <button
+    aria-label="Toggle tasks complete status"
+    class="btn complete-btn"
+    data-testid="toggle"
+  >
+    <div
+      class="todo-text-wrapper"
+    >
+      <i
+        class="check-icon "
+        data-testid="check-icon"
+      />
+      <p
+        class="todo-text "
+      >
+        Go to the supermarket
+      </p>
+    </div>
+  </button>
+  <button
+    aria-label="Delete task"
+    class="btn delete-btn"
+    data-testid="delete"
+  >
+    <i
+      class="delete-icon "
+      data-testid="delete-icon"
+    />
+  </button>
+</div>
+`;

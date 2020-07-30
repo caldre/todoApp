@@ -1,40 +1,18 @@
 import React from "react";
+import { render, fireEvent } from "@testing-library/react";
 import Todo from "../Todo/Todo";
-import renderer, { act } from "react-test-renderer";
-import { shallow, configure } from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
+import renderer from "react-test-renderer";
 
-const props = { id: 43124321, name: "Go to the supermarket", complete: false };
-const removeTodo = () => {};
-const toggleCompleteStatus = () => {};
-const setTheme = () => {};
-
-configure({ adapter: new Adapter() });
+let props = { id: 43124321, name: "Go to the supermarket", complete: false };
 
 test("Todo component renders", () => {
-  const component = renderer.create(
-    <Todo
-      key={props.id}
-      todoDetails={props}
-      toggleCompleteStatus={toggleCompleteStatus}
-      removeTodo={removeTodo}
-      setTheme={setTheme}
-    />
-  );
-  let tree = component.toJSON();
-  expect(tree).toMatchSnapshot();
+  const component = render(<Todo key={props.id} todoDetails={props} />);
+
+  expect(component.container.firstChild).toMatchSnapshot();
 });
 
 test("Check that component renders with correct default props", () => {
-  const testRenderer = renderer.create(
-    <Todo
-      key={props.id}
-      todoDetails={props}
-      toggleCompleteStatus={toggleCompleteStatus}
-      removeTodo={removeTodo}
-      setTheme={setTheme}
-    />
-  );
+  const testRenderer = renderer.create(<Todo todoDetails={props} />);
   const testInstance = testRenderer.root;
 
   expect(testInstance.findByType(Todo).props.todoDetails.id).toBe(43124321);
@@ -44,45 +22,40 @@ test("Check that component renders with correct default props", () => {
   expect(testInstance.findByType(Todo).props.todoDetails.complete).toBe(false);
 });
 
-test("Changes state with mouse events", () => {
-  const component = renderer.create(
-    <Todo
-      key={props.id}
-      todoDetails={props}
-      toggleCompleteStatus={toggleCompleteStatus}
-      removeTodo={removeTodo}
-      setTheme={setTheme}
-    />
-  );
-  let tree = component.toJSON();
-  expect(tree).toMatchSnapshot();
+test("Toggles delete-icon with mouse hover", () => {
+  const component = render(<Todo key={props.id} todoDetails={props} />);
+  const todoWrapper = component.getByTestId("todo-wrapper");
+  const deleteIcon = component.getByTestId("delete-icon");
 
-  // manually trigger the event onMouseOver
-  act(() => {
-    tree.props.onMouseOver();
-    // re-rendering
-    tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
-  });
-
-  // manually trigger the event onMouseLeave
-  act(() => {
-    tree.props.onMouseLeave();
-    // re-rendering
-    tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
-  });
+  expect(deleteIcon.classList.contains("fa-window-close")).toBe(false);
+  fireEvent.mouseOver(todoWrapper);
+  expect(deleteIcon.classList.contains("fa-window-close")).toBe(true);
+  fireEvent.mouseLeave(todoWrapper);
+  expect(deleteIcon.classList.contains("fa-window-close")).toBe(false);
 });
 
-test("renders two buttons", () => {
-  const wrapper = shallow(
-    <Todo
-      key={props.id}
-      todoDetails={props}
-      toggleCompleteStatus={toggleCompleteStatus}
-      removeTodo={removeTodo}
-      setTheme={setTheme}
-    />
+test("Toggle button is called exactly once with a correct argument", () => {
+  const mockToggle = jest.fn();
+  const component = render(
+    <Todo todoDetails={props} toggleCompleteStatus={mockToggle} />
   );
-  expect(wrapper.find("button").length).toBe(2);
+  const toggleComplete = component.getByTestId("toggle");
+
+  expect(mockToggle).toHaveBeenCalledTimes(0);
+  fireEvent.click(toggleComplete);
+  expect(mockToggle).toHaveBeenCalledTimes(1);
+  expect(mockToggle).toHaveBeenCalledWith(43124321);
+});
+
+test("Delete button is called exactly once with a correct argument", () => {
+  const mockDelete = jest.fn();
+  const component = render(
+    <Todo key={props.id} todoDetails={props} removeTodo={mockDelete} />
+  );
+  const deleteButton = component.getByTestId("delete");
+
+  expect(mockDelete).toHaveBeenCalledTimes(0);
+  fireEvent.click(deleteButton);
+  expect(mockDelete).toHaveBeenCalledTimes(1);
+  expect(mockDelete).toHaveBeenCalledWith(43124321);
 });
