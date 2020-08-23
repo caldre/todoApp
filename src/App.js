@@ -1,18 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import AddTodo from "./components/AddTodo/AddTodo";
 import Todo from "./components/Todo/Todo";
+import DropDown from "./components/DropDown/DropDown";
 import { v4 as uuid } from "uuid";
+import TodoService from "./utils/TodoService";
 import "./App.css";
 
 const App = () => {
-  const [todos, setTodos] = useState([
-    { id: uuid(), name: "Go to the supermarket", complete: false },
-    { id: uuid(), name: "Call Alice", complete: false },
-    { id: uuid(), name: "Ask Alice to call Bob", complete: false },
-    { id: uuid(), name: "Do the dishes", complete: false },
-    { id: uuid(), name: "Change car tyres", complete: false },
-  ]);
+  const [todos, setTodos] = useState([]);
+  const [selectedUser, setSelectedUser] = useState(1);
   const [darkMode, setDarkMode] = useState(false);
+
+  useEffect(() => {
+    fetch("http://localhost:3001/todos")
+      .then((response) => response.json())
+      .then((response) => {
+        setTodos(response);
+      });
+  }, []);
+
+  // console.log(todos);
+
+  const allUserIds = todos.map((item) => item.userId);
+  const uniqueIds = [...new Set(allUserIds)];
 
   const handleDarkModeClick = () => {
     setDarkMode(!darkMode);
@@ -23,7 +33,7 @@ const App = () => {
   };
 
   const addTodo = (todo) => {
-    setTodos([...todos, { id: uuid(), name: todo, complete: false }]);
+    setTodos([...todos, { id: uuid(), title: todo, completed: false }]);
   };
 
   const removeTodo = (id) => {
@@ -33,12 +43,16 @@ const App = () => {
   const toggleCompleteStatus = (id) => {
     setTodos(
       todos.map((todo) => {
-        return todo.id === id ? { ...todo, complete: !todo.complete } : todo;
+        return todo.id === id ? { ...todo, completed: !todo.completed } : todo;
       })
     );
   };
 
-  const renderedTodos = todos.map((todo) => {
+  const filteredTodos = todos.filter((todo) => {
+    return todo.userId === selectedUser;
+  });
+
+  const renderedTodos = filteredTodos.map((todo) => {
     return (
       <Todo
         key={todo.id}
@@ -58,6 +72,7 @@ const App = () => {
           aria-label="Toggle dark theme"
         ></button>
         <AddTodo onSubmit={addTodo} />
+        <DropDown users={uniqueIds} setSelectedUser={setSelectedUser} />
         {renderedTodos}
       </div>
     </div>

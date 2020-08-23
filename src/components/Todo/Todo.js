@@ -31,12 +31,14 @@ const Todo = (props) => {
           <i
             data-testid="check-icon"
             className={`check-icon ${
-              todoDetails.complete ? "fas fa-check-circle fa-2x" : ""
+              todoDetails.completed ? "fas fa-check-circle fa-2x" : ""
             }`}
           />
 
-          <p className={`todo-text ${todoDetails.complete ? "completed" : ""}`}>
-            {todoDetails.name}
+          <p
+            className={`todo-text ${todoDetails.completed ? "completed" : ""}`}
+          >
+            {todoDetails.title}
           </p>
         </div>
       </button>
