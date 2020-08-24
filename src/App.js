@@ -4,6 +4,7 @@ import Todo from "./components/Todo/Todo";
 import DropDown from "./components/DropDown/DropDown";
 import { v4 as uuid } from "uuid";
 import TodoService from "./utils/TodoService";
+import { saveState, loadState, clearState } from "./utils/localStorage";
 import "./App.css";
 
 const App = () => {
@@ -12,14 +13,16 @@ const App = () => {
   const [darkMode, setDarkMode] = useState(false);
 
   useEffect(() => {
-    fetch("http://localhost:3001/todos")
-      .then((response) => response.json())
-      .then((response) => {
-        setTodos(response);
-      });
+    if (localStorage.getItem("todos") === null) {
+      fetch("http://localhost:3001/todos")
+        .then((response) => response.json())
+        .then((response) => {
+          setTodos(response);
+          saveState(response);
+        });
+    }
+    setTodos(loadState());
   }, []);
-
-  // console.log(todos);
 
   const allUserIds = todos.map((item) => item.userId);
   const uniqueIds = [...new Set(allUserIds)];
@@ -33,19 +36,26 @@ const App = () => {
   };
 
   const addTodo = (todo) => {
-    setTodos([...todos, { id: uuid(), title: todo, completed: false }]);
+    let newTodoList = [
+      ...todos,
+      { userId: selectedUser, id: uuid(), title: todo, completed: false },
+    ];
+    setTodos(newTodoList);
+    saveState(newTodoList);
   };
 
   const removeTodo = (id) => {
-    setTodos(todos.filter((todo) => todo.id !== id));
+    let newTodoList = todos.filter((todo) => todo.id !== id);
+    setTodos(newTodoList);
+    saveState(newTodoList);
   };
 
   const toggleCompleteStatus = (id) => {
-    setTodos(
-      todos.map((todo) => {
-        return todo.id === id ? { ...todo, completed: !todo.completed } : todo;
-      })
-    );
+    let newTodoList = todos.map((todo) => {
+      return todo.id === id ? { ...todo, completed: !todo.completed } : todo;
+    });
+    setTodos(newTodoList);
+    saveState(newTodoList);
   };
 
   const filteredTodos = todos.filter((todo) => {
@@ -71,6 +81,13 @@ const App = () => {
           onClick={handleDarkModeClick}
           aria-label="Toggle dark theme"
         ></button>
+        <button
+          className="btn clear-btn"
+          onClick={() => clearState()}
+          aria-label="Clear todos from memory"
+        >
+          Clear memory
+        </button>
         <AddTodo onSubmit={addTodo} />
         <DropDown users={uniqueIds} setSelectedUser={setSelectedUser} />
         {renderedTodos}

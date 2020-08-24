@@ -3,15 +3,17 @@ import "./Todo.css";
 
 const Todo = (props) => {
   const [hovered, setHovered] = useState(false);
+  const [editing, setEditing] = useState(false);
 
-  const { todoDetails, toggleCompleteStatus, removeTodo } = props;
+  const { toggleCompleteStatus, removeTodo } = props;
+  const { userId, id, title, completed } = props.todoDetails;
 
   const handleTogglingClick = () => {
-    toggleCompleteStatus(todoDetails.id);
+    toggleCompleteStatus(id);
   };
 
   const handleRemoveClick = () => {
-    removeTodo(todoDetails.id);
+    removeTodo(id);
   };
 
   return (
@@ -31,17 +33,16 @@ const Todo = (props) => {
           <i
             data-testid="check-icon"
             className={`check-icon ${
-              todoDetails.completed ? "fas fa-check-circle fa-2x" : ""
+              completed ? "fas fa-check-circle fa-2x" : ""
             }`}
           />
 
-          <p
-            className={`todo-text ${todoDetails.completed ? "completed" : ""}`}
-          >
-            {todoDetails.title}
-          </p>
+          <p className={`todo-text ${completed ? "completed" : ""}`}>{title}</p>
         </div>
       </button>
+      <button>Ylös</button>
+      <button>Alas</button>
+      <button onClick={() => setEditing(!editing)}>Muokkaa</button>
 
       <button
         className="btn delete-btn"
