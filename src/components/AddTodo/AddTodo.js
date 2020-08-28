@@ -1,15 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./AddTodo.css";
 
 const AddTodo = (props) => {
   const [newTodoItem, setNewTodoItem] = useState("");
+  const [user, setUser] = useState("");
 
-  const { onSubmit } = props;
+  const { onSubmit, todoDetails } = props;
+
+  useEffect(() => {
+    if (todoDetails) {
+      setNewTodoItem(todoDetails.title);
+      setUser(todoDetails.userId);
+    }
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(newTodoItem);
+    onSubmit(newTodoItem, user);
     setNewTodoItem("");
+    setUser("");
   };
 
   return (
@@ -22,6 +31,11 @@ const AddTodo = (props) => {
         autoFocus
         required
       />
+      <input
+        placeholder="Add to user"
+        value={user}
+        onChange={(e) => setUser(e.target.value)}
+      ></input>
       <button className="btn add-btn" type="submit" aria-label="Add a new task">
         <i className="add-icon fas fa-plus-circle fa-3x" />
       </button>
