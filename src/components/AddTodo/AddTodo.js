@@ -1,24 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { v4 as uuid } from "uuid";
 import "./AddTodo.css";
 
 const AddTodo = (props) => {
-  const [newTodoItem, setNewTodoItem] = useState("");
-  const [user, setUser] = useState("");
+  const [title, setTitle] = useState("");
+  const [userId, setUserId] = useState();
 
-  const { onSubmit, todoDetails } = props;
-
-  useEffect(() => {
-    if (todoDetails) {
-      setNewTodoItem(todoDetails.title);
-      setUser(todoDetails.userId);
-    }
-  }, []);
+  const { onSubmit } = props;
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(newTodoItem, user);
-    setNewTodoItem("");
-    setUser("");
+    onSubmit({ userId, id: uuid(), title, completed: false });
+    setTitle("");
+    setUserId("");
   };
 
   return (
@@ -26,15 +20,17 @@ const AddTodo = (props) => {
       <input
         placeholder="Add new todo"
         className="input-field"
-        value={newTodoItem}
-        onChange={(e) => setNewTodoItem(e.target.value)}
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
         autoFocus
         required
       />
       <input
-        placeholder="Add to user"
-        value={user}
-        onChange={(e) => setUser(e.target.value)}
+        placeholder="Add to user ID"
+        type="number"
+        value={userId}
+        onChange={(e) => setUserId(Number(e.target.value))}
+        required
       ></input>
       <button className="btn add-btn" type="submit" aria-label="Add a new task">
         <i className="add-icon fas fa-plus-circle fa-3x" />

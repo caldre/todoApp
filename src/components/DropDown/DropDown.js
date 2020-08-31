@@ -1,16 +1,16 @@
 import React from "react";
 
 const DropDown = (props) => {
-  const { setSelectedUser, users } = props;
+  const { setSelectedUser, options } = props;
 
   const handleChange = (e) => {
     setSelectedUser(Number(e.target.value));
   };
 
-  const renderedUserList = users.map((user) => {
+  const renderedUserList = options.map((option) => {
     return (
-      <option key={user} onChange={() => setSelectedUser(user)} value={user}>
-        {user}
+      <option key={option} onChange={() => setSelectedUser(option)}>
+        {option}
       </option>
     );
   });

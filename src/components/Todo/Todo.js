@@ -1,16 +1,16 @@
 import React, { useState } from "react";
-import AddTodo from "../AddTodo/AddTodo";
+import UpdateTodo from "../UpdateTodo/UpdateTodo";
 import "./Todo.css";
 
 const Todo = (props) => {
   const [hovered, setHovered] = useState(false);
   const [editing, setEditing] = useState(false);
 
-  const { toggleCompleteStatus, removeTodo, moveItem } = props;
+  const { toggleCompleteStatus, updateTodo, removeTodo, moveItem } = props;
   const { userId, id, title, completed } = props.todoDetails;
 
   const handleTogglingClick = () => {
-    toggleCompleteStatus(id);
+    toggleCompleteStatus(id, completed);
   };
 
   const handleRemoveClick = () => {
@@ -18,7 +18,11 @@ const Todo = (props) => {
   };
 
   return editing ? (
-    <AddTodo todoDetails={props.todoDetails} onSubmit={props.onSubmit} />
+    <UpdateTodo
+      todo={props.todoDetails}
+      updateTodo={updateTodo}
+      setEditing={setEditing}
+    />
   ) : (
     <div
       className={`todo-wrapper`}
