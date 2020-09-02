@@ -31,6 +31,8 @@ const AddTodo = (props) => {
         value={userId}
         onChange={(e) => setUserId(Number(e.target.value))}
         required
+        min={1}
+        max={10}
       ></input>
       <button className="btn add-btn" type="submit" aria-label="Add a new task">
         <i className="add-icon fas fa-plus-circle fa-3x" />

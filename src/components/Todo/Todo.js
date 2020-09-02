@@ -1,13 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import UpdateTodo from "../UpdateTodo/UpdateTodo";
 import "./Todo.css";
 
 const Todo = (props) => {
   const [hovered, setHovered] = useState(false);
   const [editing, setEditing] = useState(false);
+  const [isLocale, setIsLocale] = useState(false);
 
-  const { toggleCompleteStatus, updateTodo, removeTodo, moveItem } = props;
-  const { userId, id, title, completed } = props.todoDetails;
+  const {
+    toggleCompleteStatus,
+    updateTodo,
+    updateLocaleTodo,
+    removeTodo,
+    moveItem,
+  } = props;
+  const { id, title, completed } = props.todoDetails;
+
+  useEffect(() => {
+    if (typeof id === "string") {
+      setIsLocale(true);
+    }
+  }, [id]);
 
   const handleTogglingClick = () => {
     toggleCompleteStatus(id, completed);
@@ -21,11 +34,13 @@ const Todo = (props) => {
     <UpdateTodo
       todo={props.todoDetails}
       updateTodo={updateTodo}
+      updateLocaleTodo={updateLocaleTodo}
+      isLocale={isLocale}
       setEditing={setEditing}
     />
   ) : (
     <div
-      className={`todo-wrapper`}
+      className={`todo-wrapper `}
       onMouseOver={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       data-testid="todo-wrapper"
