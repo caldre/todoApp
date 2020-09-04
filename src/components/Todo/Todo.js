@@ -1,42 +1,49 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import UpdateTodo from "../UpdateTodo/UpdateTodo";
 import "./Todo.css";
 
 const Todo = (props) => {
   const [hovered, setHovered] = useState(false);
   const [editing, setEditing] = useState(false);
-  const [isLocale, setIsLocale] = useState(false);
 
   const {
     toggleCompleteStatus,
     updateTodo,
-    updateLocaleTodo,
     removeTodo,
     moveItem,
+    selectedUser,
+    setSelectedUser,
+    todos,
+    setTodos,
+    users,
+    setUsers,
   } = props;
   const { id, title, completed } = props.todoDetails;
 
-  useEffect(() => {
-    if (typeof id === "string") {
-      setIsLocale(true);
-    }
-  }, [id]);
-
   const handleTogglingClick = () => {
-    toggleCompleteStatus(id, completed);
+    toggleCompleteStatus(id, completed, setTodos);
   };
 
   const handleRemoveClick = () => {
-    removeTodo(id);
+    removeTodo(
+      id,
+      selectedUser,
+      setSelectedUser,
+      todos,
+      setTodos,
+      users,
+      setUsers
+    );
   };
 
   return editing ? (
     <UpdateTodo
       todo={props.todoDetails}
       updateTodo={updateTodo}
-      updateLocaleTodo={updateLocaleTodo}
-      isLocale={isLocale}
       setEditing={setEditing}
+      todos={props.todos}
+      selectedUser={props.selectedUser}
+      setTodos={props.setTodos}
     />
   ) : (
     <div
@@ -64,12 +71,22 @@ const Todo = (props) => {
       </button>
       <div className="todo-tools-wrapper">
         <div className="arrow-wrapper">
-          <button className="btn btn-up" onClick={() => moveItem(id, -1)}>
-            <i className={`down-icon ${hovered ? "fas fa-caret-up" : ""}`}></i>
-          </button>
-          <button className="btn btn-down" onClick={() => moveItem(id, +1)}>
+          <button
+            className="btn btn-up"
+            onClick={() => moveItem(id, -1, selectedUser, todos, setTodos)}
+          >
             <i
-              className={`down-icon ${hovered ? "fas fa-caret-down" : ""}`}
+              className={`down-icon ${hovered ? "fas fa-caret-up fa-2x" : ""}`}
+            ></i>
+          </button>
+          <button
+            className="btn btn-down"
+            onClick={() => moveItem(id, +1, selectedUser, todos, setTodos)}
+          >
+            <i
+              className={`down-icon ${
+                hovered ? "fas fa-caret-down fa-2x" : ""
+              }`}
             ></i>
           </button>
         </div>

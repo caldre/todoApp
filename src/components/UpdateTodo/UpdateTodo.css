@@ -1,0 +1,29 @@
+.update-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem 0rem;
+}
+
+.field-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin: 0.5rem 0rem;
+}
+
+.update-field {
+  height: 3rem;
+  padding: 0.5rem 1rem;
+  box-shadow: var(--box-shadow) 2px 2px 10px;
+}
+
+.update-field.title {
+  height: 3rem;
+}
+
+.buttons-wrapper {
+  align-self: flex-end;
+}
+
+.btn.edit-btn {
+  margin: 0 0rem;
+}

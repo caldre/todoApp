@@ -1,10 +1,17 @@
 .input-wrapper {
   display: flex;
-  padding: 4rem 0;
+  flex-direction: column;
+  padding: 3rem 0;
+}
+
+.field {
+  padding: 1rem 0rem;
+  display: flex;
+  flex-direction: column;
 }
 
 .input-field {
-  flex-grow: 4;
+  height: 3rem;
   padding: 0.5rem 1rem;
   box-shadow: var(--box-shadow) 2px 2px 10px;
 }
