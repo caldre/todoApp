@@ -36,26 +36,22 @@ const updateTodo = (todo, todos, selectedUser, setTodos, copy) => {
     .then((res) => {
       // Päivitys samaan käyttäjälistaan
       if (res.data.todo.userId === selectedUser) {
-        console.log("trigg");
         setTodos((previousState) => {
           return previousState.map((todo) =>
             todo.id !== res.data.todo.id ? todo : res.data.todo
           );
         });
-        console.log(todos);
+
         // Päivitys eri käyttäjälistalle
       } else if (res.data.todo.userId !== selectedUser) {
         const newTodoList = [...loadState(res.data.todo.userId), res.data.todo];
-        saveState(
-          selectedUser,
-          todos.filter((todo) => todo.id !== res.data.todo.id)
-        );
         saveState(res.data.todo.userId, newTodoList);
+        setTodos((previousState) => {
+          return previousState.filter((todo) => todo.id !== res.data.todo.id);
+        });
       }
       // Kopio
       if (copy) {
-        console.log(`Copy triggered: ${copy}. Todo: ${res.data.todo}`);
-        console.log(res.data.todo);
         saveState(copy, [...loadState(copy), { ...res.data.todo, id: uuid() }]);
       }
     });

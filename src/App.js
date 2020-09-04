@@ -45,9 +45,9 @@ const App = () => {
   useEffect(() => {
     if (selectedUser) {
       const filteredTodos = todos.filter(
-        (todo) => todo.userId === selectedUser.id
+        (todo) => todo.userId === selectedUser
       );
-      saveState(selectedUser.id, filteredTodos);
+      saveState(selectedUser, filteredTodos);
     }
   }, [selectedUser, todos]);
 
@@ -57,11 +57,6 @@ const App = () => {
 
   const setTheme = () => {
     return darkMode ? "dark-mode" : "light-mode";
-  };
-
-  const handleClearButton = () => {
-    setTodos([]);
-    clearState();
   };
 
   const renderedTodos = todos.map((todo) => {
@@ -93,7 +88,7 @@ const App = () => {
         ></button>
         <button
           className="btn clear-btn"
-          onClick={() => handleClearButton()}
+          onClick={() => clearState()}
           aria-label="Clear todos from memory"
         >
           Clear memory

@@ -4,7 +4,7 @@ import "./UpdateTodo.css";
 const UpdateTodo = (props) => {
   const [title, setTitle] = useState(props.todo.title);
   const [userId, setUserId] = useState(props.todo.userId);
-  const [copy, setCopy] = useState();
+  const [copy, setCopy] = useState("");
 
   const { updateTodo, setEditing, todos, selectedUser, setTodos } = props;
 
@@ -64,7 +64,7 @@ const UpdateTodo = (props) => {
           placeholder="Modify userId"
           className="update-field"
           value={Number(userId)}
-          onChange={(e) => setUserId(e.target.value)}
+          onChange={(e) => setUserId(parseInt(e.target.value, 10))}
           required
           min={1}
           max={10}
