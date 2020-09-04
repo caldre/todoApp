@@ -1,12 +1,27 @@
 <b>Todo app using React with hooks</b>
 
-While it was nice practice for me building this app, it was also inteded as a pre-task for applying to job as a web developer. I tried to make effort on slick looking UI, also had fun experience implementing dark mode. Styling was built using pure CSS instead of frameworks to give it a bit more personal look.
-
 App was built using React functional components with the best current practices to my knowledge.
 
 You can view this app @ https://todo-with-react-hooks.netlify.app/
 
-<b>Some small betterments I made:</b>
+### `npm install`
+
+### `npm start`
+
+### `npm test`
+
+<b>Recent additions:</b>
+
+- App uses fake data from https://jsonplaceholder.typicode.com/
+- App creates different lists derived from different userId's from fake data
+- New and updated items are posted to jsonplaceholder and responses are handled as they would be in more real application. Same goes for deleting items.
+- Moving Todo-item is allowed withing the same userId
+- Todo-items title, complete-status and lists on where it appears on can all be edited, also Todo-item can be copied to another list
+- Data persist on localStorage, If one wants to reset localStorage it can be done with clicking button "Clear memory"
+
+---
+
+<b>Earlier additions:</b>
 
 - Added autofocus & required attributes to Input component
 - Added aria-labels for accessibility
@@ -14,12 +29,6 @@ You can view this app @ https://todo-with-react-hooks.netlify.app/
 - Added dark mode
 - Renamed components and variables to describe them more accurate
 - Stored some CSS properties into variables for better maintenance
-
-### `npm install`
-
-### `npm start`
-
-### `npm test`
 
 ---
 
